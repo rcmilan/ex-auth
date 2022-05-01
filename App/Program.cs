@@ -20,7 +20,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection()
     .UseRouting()
     .UseAuthentication() // quem é o client?
-    .UseAuthorization() // client tem permissão?
+    .UseAuthorization() // client tem autorização?
     .UseEndpoints(endpoints =>
     {
         endpoints.MapDefaultControllerRoute();
