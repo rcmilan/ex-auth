@@ -1,13 +1,22 @@
+using Database;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder
     .Services.AddControllersWithViews()
-    .Services.AddAuthentication("CookieAuth")
-        .AddCookie("CookieAuth", config =>
-        {
-            config.Cookie.Name = "Chocolate.Cookie";
-            config.LoginPath = "/Home/Authenticate";
-        });
+    //.Services.AddAuthentication("CookieAuth")
+    //    .AddCookie("CookieAuth", config =>
+    //    {
+    //        config.Cookie.Name = "Chocolate.Cookie";
+    //        config.LoginPath = "/Home/Authenticate";
+    //    })
+    .Services.AddDatabaseModule()
+    .ConfigureApplicationCookie(config =>
+    {
+        config.Cookie.Name = "Chocolate.Cookie";
+        config.LoginPath = "/Home/Login";
+    })
+    ;
 
 var app = builder.Build();
 
@@ -24,6 +33,7 @@ app.UseHttpsRedirection()
     .UseEndpoints(endpoints =>
     {
         endpoints.MapDefaultControllerRoute();
-    });
+    })
+    ;
 
 app.Run();
