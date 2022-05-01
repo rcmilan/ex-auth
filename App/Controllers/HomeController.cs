@@ -81,11 +81,10 @@ namespace App.Controllers
         private async Task<IActionResult> SignIn(string password, IdentityUser identityUser)
         {
             var signInResult = await _signInManager.PasswordSignInAsync(identityUser, password, isPersistent: false, lockoutOnFailure: false);
-            await _signInManager.SignInWithClaimsAsync(identityUser, isPersistent: false, new[] { new Claim("hue.claim", "hue hue hu3 brbr") });
 
             if (signInResult.Succeeded)
             {
-                // ações após success no sign in
+                await _signInManager.SignInWithClaimsAsync(identityUser, isPersistent: false, new[] { new Claim("hue.claim", "hue hue hu3 brbr") });
             }
 
             return RedirectToAction("Index");
