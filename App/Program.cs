@@ -1,23 +1,29 @@
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllersWithViews();
+builder
+    .Services.AddControllersWithViews()
+    .Services.AddAuthentication("CookieAuth")
+        .AddCookie("CookieAuth", config =>
+        {
+            config.Cookie.Name = "Chocolate.Cookie";
+            config.LoginPath = "/Home/Authenticate";
+        });
 
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error");
-    app.UseHsts();
+    app.UseExceptionHandler("/Error")
+        .UseHsts();
 }
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapDefaultControllerRoute();
-});
+app.UseHttpsRedirection()
+    .UseRouting()
+    .UseAuthentication() // quem é o client?
+    .UseAuthorization() // client tem permissão?
+    .UseEndpoints(endpoints =>
+    {
+        endpoints.MapDefaultControllerRoute();
+    });
 
 app.Run();
