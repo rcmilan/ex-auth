@@ -15,6 +15,8 @@ namespace App.Controllers
         [Authorize]
         public IActionResult Secret()
         {
+            //var user = HttpContext.User;
+
             return View();
         }
 
@@ -23,7 +25,7 @@ namespace App.Controllers
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, "UserName"),
-                new Claim(ClaimTypes.Email, "user@email.com")                
+                new Claim(ClaimTypes.Email, "user@email.com")
             };
 
             var hueClaims = new List<Claim>
