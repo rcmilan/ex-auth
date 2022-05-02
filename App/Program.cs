@@ -1,6 +1,7 @@
 using App.Authorization;
 using Database;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,7 +41,18 @@ builder.Services
         config.LoginPath = "/Home/Login";
     })
     .AddScoped<IAuthorizationHandler, CustomRequireClaimHandler>()
-    .AddControllersWithViews()
+    .AddControllersWithViews(config =>
+    {
+        //var defaultAuthPolicy = new AuthorizationPolicyBuilder()
+        //    .RequireAuthenticatedUser()
+        //    .RequireClaim("hue.claim")
+        //    .Build();
+
+        // global para todas as requisições
+        //config.Filters.Add(new AuthorizeFilter(defaultAuthPolicy));
+
+        // para evitar o filtro global, a chamada deve ter [AllowAnonymous]
+    })
     ;
 
 var app = builder.Build();
