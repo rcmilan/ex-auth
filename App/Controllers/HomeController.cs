@@ -10,11 +10,29 @@ namespace App.Controllers
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public HomeController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        private readonly IAuthorizationService _authorizationService;
+
+        public HomeController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IAuthorizationService authorizationService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _authorizationService = authorizationService;
         }
+
+        public async Task<IActionResult> HelloWorld()
+        {
+            var customPolicy = new AuthorizationPolicyBuilder("Schema")
+                .RequireClaim("Hello")
+                .Build();
+
+            var authResult = await _authorizationService.AuthorizeAsync(User, customPolicy);
+
+            if (authResult.Succeeded)
+                Console.WriteLine("Hello World");
+
+            return View("Index");
+        }
+
 
         public IActionResult Index()
         {
