@@ -2,7 +2,7 @@
 
 namespace App.Authorization
 {
-    public class CustomRequireClaimHandler: AuthorizationHandler<CustomRequireClaim>
+    public class CustomRequireClaimHandler : AuthorizationHandler<CustomRequireClaim>
     {
         public CustomRequireClaimHandler()
         {

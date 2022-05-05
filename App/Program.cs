@@ -1,7 +1,6 @@
 using App.Authorization;
 using Database;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,6 +40,7 @@ builder.Services
         config.LoginPath = "/Home/Login";
     })
     .AddScoped<IAuthorizationHandler, CustomRequireClaimHandler>()
+    .AddScoped<IAuthorizationHandler, CookieJarAuthorizationHandler>()
     .AddControllersWithViews(config =>
     {
         //var defaultAuthPolicy = new AuthorizationPolicyBuilder()

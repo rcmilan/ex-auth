@@ -30,7 +30,6 @@ namespace App.Controllers
             return View("Index");
         }
 
-
         public IActionResult Index()
         {
             return View();
