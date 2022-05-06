@@ -1,4 +1,5 @@
 using App.Authorization;
+using App.CustomPolicyProvider;
 using App.Transformer;
 using Database;
 using Microsoft.AspNetCore.Authentication;
@@ -41,6 +42,8 @@ builder.Services
         config.Cookie.Name = "Chocolate.Cookie";
         config.LoginPath = "/Home/Login";
     })
+    .AddSingleton<IAuthorizationPolicyProvider, CustomAuthorizationPolicyProvider>()
+    .AddScoped<IAuthorizationHandler, SecurityLevelHandler>()
     .AddScoped<IAuthorizationHandler, CustomRequireClaimHandler>()
     .AddScoped<IAuthorizationHandler, CookieJarAuthorizationHandler>()
     .AddScoped<IClaimsTransformation, ClaimsTransformation>()

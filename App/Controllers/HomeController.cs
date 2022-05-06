@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using App.CustomPolicyProvider;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -92,13 +93,32 @@ namespace App.Controllers
             return RedirectToAction("Secret");
         }
 
+        [SecurityLevel(5)]
+        public IActionResult SecretLevel()
+        {
+            var user = HttpContext.User;
+
+            return RedirectToAction("Secret");
+        }
+
+        [SecurityLevel(10)]
+        public IActionResult SecretHigherLevel()
+        {
+            var user = HttpContext.User;
+
+            return RedirectToAction("Secret");
+        }
+
         private async Task<IActionResult> SignIn(string password, IdentityUser identityUser)
         {
             var signInResult = await _signInManager.PasswordSignInAsync(identityUser, password, isPersistent: false, lockoutOnFailure: false);
 
             if (signInResult.Succeeded)
             {
-                await _signInManager.SignInWithClaimsAsync(identityUser, isPersistent: false, new[] { new Claim("hue.claim", "hue hue hu3 brbr") });
+                var hueClaim = new Claim("hue.claim", "hue hue hu3 brbr");
+                var securityLevel = new Claim(DynamicPolicies.SecurityLevel, "7");
+
+                await _signInManager.SignInWithClaimsAsync(identityUser, isPersistent: false, new[] { hueClaim, securityLevel });
             }
 
             return RedirectToAction("Index");
