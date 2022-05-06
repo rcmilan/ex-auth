@@ -1,5 +1,7 @@
 using App.Authorization;
+using App.Transformer;
 using Database;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -41,6 +43,7 @@ builder.Services
     })
     .AddScoped<IAuthorizationHandler, CustomRequireClaimHandler>()
     .AddScoped<IAuthorizationHandler, CookieJarAuthorizationHandler>()
+    .AddScoped<IClaimsTransformation, ClaimsTransformation>()
     .AddControllersWithViews(config =>
     {
         //var defaultAuthPolicy = new AuthorizationPolicyBuilder()

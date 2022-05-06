@@ -20,7 +20,7 @@ namespace App.Controllers
 
             await _authorizationService.AuthorizeAsync(User, resource, CookieJarAuthOperations.Open);
 
-            return View();
+            return View("Index");
         }
     }
 }
