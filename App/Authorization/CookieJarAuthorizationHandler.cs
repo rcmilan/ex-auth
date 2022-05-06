@@ -18,7 +18,7 @@ namespace App.Authorization
             }
             else if (requirement.Name == CookieJarOperations.Action123)
             {
-                if (context.User.HasClaim("CookieJarClaim1", "CookieJarClaim2"))
+                if (context.User.HasClaim("CookieJarClaim1", "CookieJarValue1"))
                 {
                     context.Succeed(requirement);
                 }
