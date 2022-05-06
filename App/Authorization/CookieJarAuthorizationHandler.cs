@@ -27,5 +27,4 @@ namespace App.Authorization
             return Task.CompletedTask;
         }
     }
-
 }

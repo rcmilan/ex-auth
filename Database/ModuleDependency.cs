@@ -6,7 +6,6 @@ namespace Database
 {
     public static class ModuleDependency
     {
-
         public static IServiceCollection AddDatabaseModule(this IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(config => config.UseInMemoryDatabase("memorydb"))

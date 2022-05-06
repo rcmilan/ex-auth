@@ -1,4 +1,5 @@
-﻿using App.CustomPolicyProvider;
+﻿using App.Attributes;
+using App.CustomPolicyProvider;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
