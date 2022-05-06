@@ -2,9 +2,9 @@
 {
     public static class CookieJarOperations
     {
-        public static string Open = "Open";
-        public static string TakeCookie = "TakeCookie";
-        public static string Action123 = "Action123";
-        public static string Look = "Look";
+        public const string Open = "Open";
+        public const string TakeCookie = "TakeCookie";
+        public const string Action123 = "Action123";
+        public const string Look = "Look";
     }
 }
