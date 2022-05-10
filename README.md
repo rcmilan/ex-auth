@@ -1,1 +1,2 @@
 - [Tutorial](https://www.youtube.com/watch?v=n-g9O0dOV9A)
+- [Roles, Claims e Policies](https://www.youtube.com/watch?v=cbtK3U2aOlg)
